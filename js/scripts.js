@@ -15,10 +15,18 @@ $(document).ready(function(){
 ////Business Logic////
 
 function convertNumber (numberInput){
-  if (numberInput > 3,999){
+  var numberArray = [[1, 'I'], [5, 'V'], [10, 'X'], [50, 'L'], [100, 'C'], [500,
+  'D'], [1000, 'M']];
+  var numberMap = new Map(numberArray);
+
+  if (numberInput > 3999){
     alert("Please enter a number less than 3,999");
   } else {
-    return numberInput ;
+    if (numberMap.get(numberInput)){
+      return numberMap.get(numberInput);
+    } else {
+      return numberInput ;
+    }
   }
-  
+
 }
