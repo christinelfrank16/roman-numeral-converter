@@ -25,26 +25,35 @@ function convertNumber (numberInput){
     if (numberMap.get(numberInput)){
       return numberMap.get(numberInput);
     } else {
-      for (var i=numberInput; i>0; i){
-        for (var mapItem of numberMap.entries()){
+        var mapEntries = numberMap.entries();
+        var count = 0;
+        for (var mapItem of mapEntries){
+          console.log(numberInput, mapItem [0], mapItem [1], count);
           var symbolValue = mapItem[0];
-          console.log(numberInput);
-          console.log(symbolValue);
             if (numberInput-symbolValue>=0){
-              console.log(symbolValue);
               while (numberInput - symbolValue >=0){
                 output += mapItem[1];
                 numberInput -= symbolValue;
               }
             }
+           if (count <6){
+             var newSymbol = numberArray[count +1][1];
+             var nextSymbolValue = numberArray[count +1][0];
+             if(nextSymbolValue.toString()[0] === "5") {
+               newSymbol = numberArray[count +2][1];
+               nextSymbolValue = numberArray[count +2][0];
+             }
+             console.log(numberInput, newSymbol, nextSymbolValue);
+            if(numberInput / nextSymbolValue >3 && symbolValue - numberInput <= nextSymbolValue) {
+              numberInput = numberInput - (symbolValue - nextSymbolValue);
+              output += newSymbol + mapItem[1];
+            }
+          }
             if ((numberInput<10 && numberInput>0) && symbolValue - 1 === numberInput) {
               numberInput = numberInput - symbolValue;
               output += "I" + mapItem[1];
-            } else{
-              if()
-            }
         }
-        i=0;
+        count++;
       }
       return output ;
     }
