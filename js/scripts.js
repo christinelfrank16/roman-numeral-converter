@@ -28,11 +28,21 @@ function convertNumber (numberInput){
       for (var i=numberInput; i>0; i){
         for (var mapItem of numberMap.entries()){
           var symbolValue = mapItem[0];
-          while (numberInput - symbolValue >=0){
-            output += mapItem[1];
-            numberInput -= symbolValue;
-
-          }
+          console.log(numberInput);
+          console.log(symbolValue);
+            if (numberInput-symbolValue>=0){
+              console.log(symbolValue);
+              while (numberInput - symbolValue >=0){
+                output += mapItem[1];
+                numberInput -= symbolValue;
+              }
+            }
+            if ((numberInput<10 && numberInput>0) && symbolValue - 1 === numberInput) {
+              numberInput = numberInput - symbolValue;
+              output += "I" + mapItem[1];
+            } else{
+              if()
+            }
         }
         i=0;
       }
