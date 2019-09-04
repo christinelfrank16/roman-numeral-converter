@@ -1,4 +1,4 @@
-import { isNumber, convertNumber, convertToInt } from '../src/NumberConverter.js';
+import { isNumber, convertNumber, convertToInt, getExact } from '../src/NumberConverter.js';
 
 describe('input-validation', function() {
 
@@ -32,5 +32,37 @@ describe('input-validation', function() {
     expect(Number.isInteger(convertToInt(input))).toEqual(true);
   });
 
+});
+
+describe('roman-numerals', function(){
+  it('should output Roman Numeral when it is exactly equivalent to input number', function(){
+    var romanArray = ['I','V','X','L','C','D','M'];
+    var num = 5;
+    var numberArray = [
+      [1, 'I'],
+      [5, 'V'],
+      [10, 'X'],
+      [50, 'L'],
+      [100, 'C'],
+      [500, 'D'],
+      [1000, 'M']
+    ];
+    expect(romanArray.includes(getExact(numberArray, num))).toEqual(true);
+  });
+
+  it('should output Roman Numeral when it is exactly equivalent to input number', function(){
+    var romanArray = ['I','V','X','L','C','D','M'];
+    var num = 6;
+    var numberArray = [
+      [1, 'I'],
+      [5, 'V'],
+      [10, 'X'],
+      [50, 'L'],
+      [100, 'C'],
+      [500, 'D'],
+      [1000, 'M']
+    ];
+    expect(romanArray.includes(getExact(numberArray, num))).toEqual(false);
+  });
 
 });

@@ -8,7 +8,7 @@ export function convertNumber(numberInput) {
     [500, 'D'],
     [1000, 'M']
   ];
-  var numberMap = new Map(numberArray.reverse());
+
   var output = '';
 
   var numCheck = isNumber(numberInput);
@@ -16,10 +16,10 @@ export function convertNumber(numberInput) {
     output = "Please enter a number less than 3,999";
   } else {
     numberInput = convertToInt(numberInput);
-    
-    if (numberMap.get(numberInput)) {
-      output = numberMap.get(numberInput);
-    } else {
+
+    output = getExact(numberArray, numberInput);
+
+    if(output === "") {
       for (var count = 0; count < numberArray.length; count++) {
         var symbolValue = numberArray[count][0];
         if (numberInput - symbolValue >= 0) {  // check if symbol should be used immediately
@@ -52,6 +52,14 @@ export function convertNumber(numberInput) {
   return output;
 }
 
+export function getExact(romanArray, num){
+  var romanNum = "";
+  var numberMap = new Map(romanArray.reverse());
+  if (numberMap.get(num)) {
+    romanNum = numberMap.get(num);
+  }
+  return romanNum;
+}
 
 export function isNumber(input) {
   var isNum = false;
