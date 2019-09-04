@@ -26,7 +26,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        user: [
+        use: [
           'style-loader',
           'css-loader'
         ]
@@ -36,7 +36,7 @@ module.exports = {
         exclude: [
           /node_modules/,
           /spec/
-        ]
+        ],
         loader: 'eslint-loader'
       }
     ]
