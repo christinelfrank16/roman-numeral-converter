@@ -1,12 +1,12 @@
 export function convertNumber(numberInput) {
   var numberArray = [
-    [1, 'I'],
-    [5, 'V'],
-    [10, 'X'],
-    [50, 'L'],
-    [100, 'C'],
+    [1000, 'M'],
     [500, 'D'],
-    [1000, 'M']
+    [100, 'C'],
+    [50, 'L'],
+    [10, 'X'],
+    [5, 'V'],
+    [1, 'I']
   ];
 
   var output = '';
@@ -20,41 +20,48 @@ export function convertNumber(numberInput) {
     output = getExact(numberArray, numberInput);
 
     if(output === "") {
-      for (var count = 0; count < numberArray.length; count++) {
-        var symbolValue = numberArray[count][0];
-        if (numberInput - symbolValue >= 0) {  // check if symbol should be used immediately
-          while (numberInput - symbolValue >= 0) { // allow repeating symbols
-            output += numberArray[count][1];
-            numberInput -= symbolValue;
-          }
-        }
-        if (count < 6) { // enables subtraction notations, not needed for I numeral
-          var newSymbol = numberArray[count + 1][1];
-          var nextSymbolValue = numberArray[count + 1][0];
-          if (nextSymbolValue.toString()[0] === "5") { // skip 5--- numerals
-            newSymbol = numberArray[count + 2][1];
-            nextSymbolValue = numberArray[count + 2][0];
-          }
-          if (numberInput / nextSymbolValue > 3 && symbolValue - numberInput <= nextSymbolValue) {
-            // trigger subtraction notation when more than 3 symbols are needed
-            numberInput = numberInput - (symbolValue - nextSymbolValue);
-            output += newSymbol + numberArray[count][1];
-          }
-        }
-        if ((numberInput < 10 && numberInput > 0) && symbolValue - 1 === numberInput) {
-          // trigger special case subtraction notation for single digits
-          numberInput = numberInput - symbolValue;
-          output += "I" + numberArray[count][1];
-        }
-      }
+      output = makeRomanNumeral(numberArray, numberInput);
     }
   }
   return output;
 }
 
+export function makeRomanNumeral(romanArray, num){
+  var output = "";
+  for (var count = 0; count < romanArray.length; count++) {
+    var symbolValue = romanArray[count][0];
+    if (num - symbolValue >= 0) {  // check if symbol should be used immediately
+      while (num - symbolValue >= 0) { // allow repeating symbols
+        output += romanArray[count][1];
+        num -= symbolValue;
+      }
+    }
+    if (count < 6) { // enables subtraction notations, not needed for I numeral
+      var newSymbol = romanArray[count + 1][1];
+      var nextSymbolValue = romanArray[count + 1][0];
+      if (nextSymbolValue.toString()[0] === "5") { // skip 5--- numerals
+        newSymbol = romanArray[count + 2][1];
+        nextSymbolValue = romanArray[count + 2][0];
+      }
+      if (num / nextSymbolValue > 3 && symbolValue - num <= nextSymbolValue) {
+        // trigger subtraction notation when more than 3 symbols are needed
+        num = num - (symbolValue - nextSymbolValue);
+        output += newSymbol + romanArray[count][1];
+      }
+    }
+    if ((num < 10 && num > 0) && symbolValue - 1 === num) {
+      // trigger special case subtraction notation for single digits
+      num = num - symbolValue;
+      output += "I" + romanArray[count][1];
+    }
+  }
+  return output;
+}
+
+
 export function getExact(romanArray, num){
   var romanNum = "";
-  var numberMap = new Map(romanArray.reverse());
+  var numberMap = new Map(romanArray);
   if (numberMap.get(num)) {
     romanNum = numberMap.get(num);
   }

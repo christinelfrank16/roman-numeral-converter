@@ -1,4 +1,4 @@
-import { isNumber, convertNumber, convertToInt, getExact } from '../src/NumberConverter.js';
+import { isNumber, convertNumber, convertToInt, getExact, makeRomanNumeral } from '../src/NumberConverter.js';
 
 describe('input-validation', function() {
 
@@ -39,13 +39,13 @@ describe('roman-numerals', function(){
     var romanArray = ['I','V','X','L','C','D','M'];
     var num = 5;
     var numberArray = [
-      [1, 'I'],
-      [5, 'V'],
-      [10, 'X'],
-      [50, 'L'],
-      [100, 'C'],
+      [1000, 'M'],
       [500, 'D'],
-      [1000, 'M']
+      [100, 'C'],
+      [50, 'L'],
+      [10, 'X'],
+      [5, 'V'],
+      [1, 'I']
     ];
     expect(romanArray.includes(getExact(numberArray, num))).toEqual(true);
   });
@@ -54,15 +54,29 @@ describe('roman-numerals', function(){
     var romanArray = ['I','V','X','L','C','D','M'];
     var num = 6;
     var numberArray = [
-      [1, 'I'],
-      [5, 'V'],
-      [10, 'X'],
-      [50, 'L'],
-      [100, 'C'],
+      [1000, 'M'],
       [500, 'D'],
-      [1000, 'M']
+      [100, 'C'],
+      [50, 'L'],
+      [10, 'X'],
+      [5, 'V'],
+      [1, 'I']
     ];
     expect(romanArray.includes(getExact(numberArray, num))).toEqual(false);
+  });
+
+  it('should output Roman Numerals that are the sum of its digits for single digit input', function(){
+    var numberArray = [
+      [1000, 'M'],
+      [500, 'D'],
+      [100, 'C'],
+      [50, 'L'],
+      [10, 'X'],
+      [5, 'V'],
+      [1, 'I']
+    ];
+    var num = 7;
+    expect(makeRomanNumeral(numberArray, num)).toEqual("VII");
   });
 
 });
