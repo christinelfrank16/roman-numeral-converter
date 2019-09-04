@@ -10,11 +10,13 @@ export function convertNumber(numberInput) {
   ];
   var numberMap = new Map(numberArray.reverse());
   var output = '';
-  if (numberInput > 3999) {
-    alert("Please enter a number less than 3,999");
+
+  var numCheck = isNumber(numberInput);
+  if (numberInput > 3999 && numCheck) {
+    output = "Please enter a number less than 3,999";
   } else {
     if (numberMap.get(numberInput)) {
-      return numberMap.get(numberInput);
+      output = numberMap.get(numberInput);
     } else {
       for (var count = 0; count < numberArray.length; count++) {
         var symbolValue = numberArray[count][0];
@@ -43,8 +45,16 @@ export function convertNumber(numberInput) {
           output += "I" + numberArray[count][1];
         }
       }
-      return output;
     }
   }
+  return output;
+}
 
+
+export function isNumber(input) {
+  var isNum = false;
+  if( typeof input === "number") {
+    isNum = true;
+  }
+  return isNum;
 }

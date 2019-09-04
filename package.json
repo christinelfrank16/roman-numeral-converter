@@ -4,7 +4,7 @@
   "description": "#### _This program will take any Arabic number up to 3,999 and convert it into a Roman numeral. This is part of a programming exercise on arrays and loops for Epicodus, 08/22/19_",
   "main": "index.js",
   "scripts": {
-    "test": "karma start karma.conf.js",
+    "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "build": "webpack --mode development",
     "start": "npm run build; webpack-dev-server --open --mode development",
     "lint": "eslint src/*.js"
