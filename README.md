@@ -13,6 +13,7 @@
 ## Specifications
 1. Disregard non-numeric input
 2. Does not accept values greater than 3,999
+2. a. Converts non-integer numbers to integers
 3. Displays a Roman numeral when it is exactly equivalent to the input number
 4. Single digits are the sum of their symbols
 5. When more than three of one symbol is required, use subtraction notation

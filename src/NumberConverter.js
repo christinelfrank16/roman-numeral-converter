@@ -15,6 +15,8 @@ export function convertNumber(numberInput) {
   if (numberInput > 3999 && numCheck) {
     output = "Please enter a number less than 3,999";
   } else {
+    numberInput = convertToInt(numberInput);
+    
     if (numberMap.get(numberInput)) {
       output = numberMap.get(numberInput);
     } else {
@@ -57,4 +59,11 @@ export function isNumber(input) {
     isNum = true;
   }
   return isNum;
+}
+
+export function convertToInt(input){
+  if(!Number.isInteger(input)){
+    input = Math.floor(input);
+  }
+  return input;
 }
