@@ -12,7 +12,7 @@ $(document).ready(function() {
     event.preventDefault();
     var numberInput = parseInt($("input#num").val());
 
-    $("#output").text(convertNumber(numberInput));
+    $("#output").text(NumberConverter.convertNumber(numberInput));
   });
 
 });
