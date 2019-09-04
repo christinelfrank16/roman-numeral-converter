@@ -1,20 +1,4 @@
-////User Interface///
-
-$(document).ready(function() {
-
-  $("form#user-input").submit(function(event) {
-    event.preventDefault();
-    var numberInput = parseInt($("input#num").val());
-
-    $("#output").text(convertNumber(numberInput));
-  });
-
-});
-
-
-////Business Logic////
-
-function convertNumber(numberInput) {
+export function convertNumber(numberInput) {
   var numberArray = [
     [1, 'I'],
     [5, 'V'],
